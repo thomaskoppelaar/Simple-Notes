@@ -10,7 +10,7 @@ import com.simplemobiletools.commons.extensions.value
 import com.simplemobiletools.notes.pro.R
 import kotlinx.android.synthetic.main.dialog_rename_checklist_item.view.*
 
-class RenameChecklistItemDialog(val activity: Activity, val oldTitle: String, callback: (newTitle: String) -> Unit) {
+class RenameChecklistItemDialog(val activity: Activity, private val oldTitle: String, callback: (newTitle: String) -> Unit) {
     init {
         val view = activity.layoutInflater.inflate(R.layout.dialog_rename_checklist_item, null).apply {
             checklist_item_title.setText(oldTitle)

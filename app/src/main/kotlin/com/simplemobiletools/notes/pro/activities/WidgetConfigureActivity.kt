@@ -113,7 +113,7 @@ class WidgetConfigureActivity : SimpleActivity() {
             items.add(RadioItem(it.id!!.toInt(), it.title))
         }
 
-        RadioGroupDialog(this, items, mCurrentNoteId.toInt()) {
+        RadioGroupDialog(this, items, mCurrentNoteId.toInt()) { it ->
             val selectedId = it as Int
             updateCurrentNote(mNotes.first { it.id!!.toInt() == selectedId })
         }

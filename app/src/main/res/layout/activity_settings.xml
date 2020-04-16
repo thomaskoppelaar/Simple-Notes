@@ -2,12 +2,12 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/settings_scrollview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/settings_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -24,12 +24,12 @@
             android:paddingBottom="@dimen/activity_margin">
 
             <com.simplemobiletools.commons.views.MyTextView
-                android:id="@+id/settings_customize_colors_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:paddingStart="@dimen/medium_margin"
-                android:text="@string/customize_colors"/>
+                android:text="@string/customize_colors"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
 
@@ -52,7 +52,8 @@
                 android:clickable="false"
                 android:paddingStart="@dimen/medium_margin"
                 android:text="@string/use_english_language"
-                app:switchPadding="@dimen/medium_margin"/>
+                app:switchPadding="@dimen/medium_margin"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
 
@@ -85,7 +86,8 @@
                 android:clickable="false"
                 android:paddingStart="@dimen/medium_margin"
                 android:text="@string/show_word_count"
-                app:switchPadding="@dimen/medium_margin"/>
+                app:switchPadding="@dimen/medium_margin"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
 
@@ -108,7 +110,8 @@
                 android:clickable="false"
                 android:paddingStart="@dimen/medium_margin"
                 android:text="@string/links_and_emails_clickable"
-                app:switchPadding="@dimen/medium_margin"/>
+                app:switchPadding="@dimen/medium_margin"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
 
@@ -131,7 +134,8 @@
                 android:clickable="false"
                 android:paddingStart="@dimen/medium_margin"
                 android:text="@string/monospaced_font"
-                app:switchPadding="@dimen/medium_margin"/>
+                app:switchPadding="@dimen/medium_margin"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
 
@@ -154,7 +158,8 @@
                 android:clickable="false"
                 android:paddingStart="@dimen/medium_margin"
                 android:text="@string/use_incognito_mode"
-                app:switchPadding="@dimen/medium_margin"/>
+                app:switchPadding="@dimen/medium_margin"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
 
@@ -177,7 +182,8 @@
                 android:clickable="false"
                 android:paddingStart="@dimen/medium_margin"
                 android:text="@string/enable_line_wrap"
-                app:switchPadding="@dimen/medium_margin"/>
+                app:switchPadding="@dimen/medium_margin"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
 
@@ -193,7 +199,6 @@
             android:paddingBottom="@dimen/activity_margin">
 
             <com.simplemobiletools.commons.views.MyTextView
-                android:id="@+id/settings_font_size_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -225,7 +230,6 @@
             android:paddingBottom="@dimen/activity_margin">
 
             <com.simplemobiletools.commons.views.MyTextView
-                android:id="@+id/settings_gravity_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -274,7 +278,8 @@
                 android:clickable="false"
                 android:paddingStart="@dimen/medium_margin"
                 android:text="@string/place_cursor_end"
-                app:switchPadding="@dimen/medium_margin"/>
+                app:switchPadding="@dimen/medium_margin"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
 
@@ -297,7 +302,8 @@
                 android:clickable="false"
                 android:paddingStart="@dimen/medium_margin"
                 android:text="@string/show_keyboard"
-                app:switchPadding="@dimen/medium_margin"/>
+                app:switchPadding="@dimen/medium_margin"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
 
@@ -320,7 +326,8 @@
                 android:clickable="false"
                 android:paddingStart="@dimen/medium_margin"
                 android:text="@string/show_note_picker"
-                app:switchPadding="@dimen/medium_margin"/>
+                app:switchPadding="@dimen/medium_margin"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
 
@@ -343,7 +350,8 @@
                 android:clickable="false"
                 android:paddingStart="@dimen/medium_margin"
                 android:text="@string/move_undone_checklist_items"
-                app:switchPadding="@dimen/medium_margin"/>
+                app:switchPadding="@dimen/medium_margin"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
 
@@ -376,7 +384,8 @@
                 android:clickable="false"
                 android:paddingStart="@dimen/medium_margin"
                 android:text="@string/autosave_notes"
-                app:switchPadding="@dimen/medium_margin"/>
+                app:switchPadding="@dimen/medium_margin"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
 
@@ -399,7 +408,8 @@
                 android:clickable="false"
                 android:paddingStart="@dimen/medium_margin"
                 android:text="@string/display_success_message"
-                app:switchPadding="@dimen/medium_margin"/>
+                app:switchPadding="@dimen/medium_margin"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
 
@@ -425,12 +435,12 @@
             android:paddingBottom="@dimen/activity_margin">
 
             <com.simplemobiletools.commons.views.MyTextView
-                android:id="@+id/settings_customize_widget_colors_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:paddingStart="@dimen/medium_margin"
-                android:text="@string/customize_widget_colors"/>
+                android:text="@string/customize_widget_colors"
+                tools:ignore="RtlSymmetry" />
 
         </RelativeLayout>
     </LinearLayout>

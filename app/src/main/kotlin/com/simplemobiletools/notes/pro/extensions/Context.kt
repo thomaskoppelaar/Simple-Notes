@@ -12,9 +12,9 @@ import com.simplemobiletools.notes.pro.interfaces.WidgetsDao
 
 val Context.config: Config get() = Config.newInstance(applicationContext)
 
-val Context.notesDB: NotesDao get() = NotesDatabase.getInstance(applicationContext).NotesDao()
+val Context.notesDB: NotesDao get() = NotesDatabase.getInstance(applicationContext).notesDao()
 
-val Context.widgetsDB: WidgetsDao get() = NotesDatabase.getInstance(applicationContext).WidgetsDao()
+val Context.widgetsDB: WidgetsDao get() = NotesDatabase.getInstance(applicationContext).widgetsDao()
 
 fun Context.updateWidgets() {
     val widgetIDs = AppWidgetManager.getInstance(applicationContext).getAppWidgetIds(ComponentName(applicationContext, MyWidgetProvider::class.java))

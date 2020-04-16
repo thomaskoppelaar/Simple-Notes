@@ -93,7 +93,7 @@ class ChecklistAdapter(activity: BaseSimpleActivity, var items: ArrayList<Checkl
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
-        holder.bindView(item, true, true) { itemView, layoutPosition ->
+        holder.bindView(item, allowSingleClick = true, allowLongClick = true) { itemView, layoutPosition ->
             setupView(itemView, item, holder)
         }
         bindViewHolder(holder)
@@ -121,8 +121,8 @@ class ChecklistAdapter(activity: BaseSimpleActivity, var items: ArrayList<Checkl
     private fun deleteSelection() {
         val removeItems = ArrayList<ChecklistItem>(selectedKeys.size)
         val positions = ArrayList<Int>()
-        selectedKeys.forEach {
-            val key = it
+        selectedKeys.forEach { it ->
+            val key: Int = it
             val position = items.indexOfFirst { it.id == key }
             if (position != -1) {
                 positions.add(position)

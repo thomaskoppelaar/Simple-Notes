@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/open_file_holder"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,7 +10,6 @@
     android:paddingRight="@dimen/activity_margin">
 
     <com.simplemobiletools.commons.views.MyTextView
-        android:id="@+id/open_file_filename_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/filename"
@@ -20,10 +19,11 @@
         android:id="@+id/open_file_filename"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_margin"
+        android:layout_marginStart="@dimen/activity_margin"
         android:layout_marginBottom="@dimen/activity_margin"
         android:paddingTop="@dimen/small_margin"
-        android:paddingRight="@dimen/small_margin"/>
+        android:paddingEnd="@dimen/small_margin"
+        tools:ignore="RtlSymmetry" />
 
     <RadioGroup
         android:id="@+id/open_file_type"
@@ -40,7 +40,6 @@
             android:text="@string/update_file_at_note"/>
 
         <com.simplemobiletools.commons.views.MyCompatRadioButton
-            android:id="@+id/open_file_content_only"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/normal_margin"

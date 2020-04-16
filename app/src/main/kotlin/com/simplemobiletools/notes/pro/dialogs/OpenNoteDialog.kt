@@ -1,5 +1,6 @@
 package com.simplemobiletools.notes.pro.dialogs
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,7 @@ class OpenNoteDialog(val activity: Activity, val callback: (checkedId: Long) -> 
         }
     }
 
+    @SuppressLint("InflateParams")
     private fun initDialog(notes: ArrayList<Note>, view: View) {
         val textColor = activity.config.textColor
         notes.forEach {

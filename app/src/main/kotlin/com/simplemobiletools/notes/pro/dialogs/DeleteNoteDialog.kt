@@ -9,7 +9,7 @@ import com.simplemobiletools.notes.pro.models.Note
 import kotlinx.android.synthetic.main.dialog_delete_note.view.*
 
 class DeleteNoteDialog(val activity: SimpleActivity, val note: Note, val callback: (deleteFile: Boolean) -> Unit) {
-    var dialog: AlertDialog? = null
+    private var dialog: AlertDialog? = null
 
     init {
         val message = String.format(activity.getString(R.string.delete_note_prompt_message), note.title)

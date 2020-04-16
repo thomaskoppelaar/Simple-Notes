@@ -22,7 +22,7 @@ import com.simplemobiletools.notes.pro.helpers.*
 import com.simplemobiletools.notes.pro.models.ChecklistItem
 import com.simplemobiletools.notes.pro.models.Note
 
-class WidgetAdapter(val context: Context, val intent: Intent) : RemoteViewsService.RemoteViewsFactory {
+class WidgetAdapter(val context: Context, private val intent: Intent) : RemoteViewsService.RemoteViewsFactory {
     private val textIds = arrayOf(R.id.widget_text_left, R.id.widget_text_center, R.id.widget_text_right)
     private var widgetTextColor = DEFAULT_WIDGET_TEXT_COLOR
     private var note: Note? = null

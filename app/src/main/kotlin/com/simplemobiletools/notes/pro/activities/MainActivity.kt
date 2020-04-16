@@ -14,6 +14,7 @@ import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.TextView
+import com.simplemobiletools.commons.BuildConfig
 import com.simplemobiletools.commons.dialogs.ConfirmationAdvancedDialog
 import com.simplemobiletools.commons.dialogs.FilePickerDialog
 import com.simplemobiletools.commons.dialogs.RadioGroupDialog
@@ -24,7 +25,7 @@ import com.simplemobiletools.commons.models.FileDirItem
 import com.simplemobiletools.commons.models.RadioItem
 import com.simplemobiletools.commons.models.Release
 import com.simplemobiletools.commons.views.MyEditText
-import com.simplemobiletools.notes.pro.BuildConfig
+//import com.simplemobiletools.notes.pro.BuildConfig
 import com.simplemobiletools.notes.pro.R
 import com.simplemobiletools.notes.pro.adapters.NotesPagerAdapter
 import com.simplemobiletools.notes.pro.databases.NotesDatabase
@@ -41,11 +42,11 @@ import java.io.File
 import java.nio.charset.Charset
 
 class MainActivity : SimpleActivity() {
-    private val EXPORT_FILE_SYNC = 1
-    private val EXPORT_FILE_NO_SYNC = 2
+    private val exportFileSync = 1
+    private val exportFileNoSync = 2
 
-    private val PICK_OPEN_FILE_INTENT = 1
-    private val PICK_EXPORT_FILE_INTENT = 2
+    private val pickOpenFileIntent = 1
+    private val pickExportFileIntent = 2
 
     private lateinit var mCurrentNote: Note
     private var mNotes = ArrayList<Note>()
@@ -227,9 +228,9 @@ class MainActivity : SimpleActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
         super.onActivityResult(requestCode, resultCode, resultData)
-        if (requestCode == PICK_OPEN_FILE_INTENT && resultCode == RESULT_OK && resultData != null && resultData.data != null) {
+        if (requestCode == pickOpenFileIntent && resultCode == RESULT_OK && resultData != null && resultData.data != null) {
             importUri(resultData.data!!)
-        } else if (requestCode == PICK_EXPORT_FILE_INTENT && resultCode == Activity.RESULT_OK && resultData != null && resultData.data != null) {
+        } else if (requestCode == pickExportFileIntent && resultCode == Activity.RESULT_OK && resultData != null && resultData.data != null) {
             tryExportNoteValueToFile(resultData.dataString!!, getCurrentNoteValue(), true)
         }
     }
@@ -266,8 +267,8 @@ class MainActivity : SimpleActivity() {
     }
 
     private fun handleTextIntent(text: String) {
-        NotesHelper(this).getNotes {
-            val notes = it
+        NotesHelper(this).getNotes { it ->
+            val notes: ArrayList<Note> = it
             val list = arrayListOf<RadioItem>().apply {
                 add(RadioItem(0, getString(R.string.create_new_note)))
                 notes.forEachIndexed { index, note ->
@@ -287,7 +288,7 @@ class MainActivity : SimpleActivity() {
     }
 
     private fun handleUri(uri: Uri) {
-        NotesHelper(this).getNoteIdWithPath(uri.path!!) {
+        NotesHelper(this).getNoteIdWithPath(uri.path!!) { it ->
             if (it != null && it > 0L) {
                 updateSelectedNote(it)
                 return@getNoteIdWithPath
@@ -301,7 +302,7 @@ class MainActivity : SimpleActivity() {
     }
 
     private fun initViewPager(wantedNoteId: Long? = null) {
-        NotesHelper(this).getNotes {
+        NotesHelper(this).getNotes { it ->
             mNotes = it
             invalidateOptionsMenu()
             mCurrentNote = mNotes[0]
@@ -343,9 +344,7 @@ class MainActivity : SimpleActivity() {
 
         view_pager.onPageChangeListener {
             currentTextFragment?.removeTextWatcher()
-            currentNotesView()?.let { noteView ->
-                noteView.text.clearBackgroundSpans()
-            }
+            currentNotesView()?.text?.clearBackgroundSpans()
 
             closeSearch()
             currentTextFragment?.setTextWatcher()
@@ -513,13 +512,13 @@ class MainActivity : SimpleActivity() {
             Intent(Intent.ACTION_GET_CONTENT).apply {
                 addCategory(Intent.CATEGORY_OPENABLE)
                 type = "text/*"
-                startActivityForResult(this, PICK_OPEN_FILE_INTENT)
+                startActivityForResult(this, pickOpenFileIntent)
             }
         }
     }
 
     private fun openFile() {
-        FilePickerDialog(this, canAddShowHiddenButton = true) {
+        FilePickerDialog(this, canAddShowHiddenButton = true) { it ->
             checkFile(it, true) {
                 ensureBackgroundThread {
                     val fileText = it.readText().trim()
@@ -607,7 +606,7 @@ class MainActivity : SimpleActivity() {
     }
 
     private fun openPath(path: String) {
-        checkFile(path, false) {
+        checkFile(path, false) { it ->
             val title = path.getFilenameFromPath()
             try {
                 val fileText = it.readText().trim()
@@ -630,8 +629,8 @@ class MainActivity : SimpleActivity() {
     }
 
     private fun openFolder() {
-        FilePickerDialog(this, pickFile = false, canAddShowHiddenButton = true) {
-            openFolder(it) {
+        FilePickerDialog(this, pickFile = false, canAddShowHiddenButton = true) { it ->
+            openFolder(it) { it ->
                 ImportFolderDialog(this, it.path) {
                     NotesHelper(this).getNotes {
                         mNotes = it
@@ -664,7 +663,7 @@ class MainActivity : SimpleActivity() {
                 putExtra(Intent.EXTRA_TITLE, "${mCurrentNote.title.removeSuffix(".txt")}.txt")
                 addCategory(Intent.CATEGORY_OPENABLE)
 
-                startActivityForResult(this, PICK_EXPORT_FILE_INTENT)
+                startActivityForResult(this, pickExportFileIntent)
             }
         }
     }
@@ -684,11 +683,11 @@ class MainActivity : SimpleActivity() {
 
     private fun showExportFilePickUpdateDialog(exportPath: String, textToExport: String) {
         val items = arrayListOf(
-                RadioItem(EXPORT_FILE_SYNC, getString(R.string.update_file_at_note)),
-                RadioItem(EXPORT_FILE_NO_SYNC, getString(R.string.only_export_file_content)))
+                RadioItem(exportFileSync, getString(R.string.update_file_at_note)),
+                RadioItem(exportFileNoSync, getString(R.string.only_export_file_content)))
 
         RadioGroupDialog(this, items) {
-            val syncFile = it as Int == EXPORT_FILE_SYNC
+            val syncFile = it as Int == exportFileSync
             tryExportNoteValueToFile(exportPath, textToExport, true) {
                 if (syncFile) {
                     mCurrentNote.path = exportPath
@@ -715,13 +714,13 @@ class MainActivity : SimpleActivity() {
     private fun exportAllNotes() {
         ExportFilesDialog(this, mNotes) { parent, extension ->
             val items = arrayListOf(
-                    RadioItem(EXPORT_FILE_SYNC, getString(R.string.update_file_at_note)),
-                    RadioItem(EXPORT_FILE_NO_SYNC, getString(R.string.only_export_file_content)))
+                    RadioItem(exportFileSync, getString(R.string.update_file_at_note)),
+                    RadioItem(exportFileNoSync, getString(R.string.only_export_file_content)))
 
-            RadioGroupDialog(this, items) {
-                val syncFile = it as Int == EXPORT_FILE_SYNC
+            RadioGroupDialog(this, items) { it ->
+                val syncFile = it as Int == exportFileSync
                 var failCount = 0
-                NotesHelper(this).getNotes {
+                NotesHelper(this).getNotes { it ->
                     mNotes = it
                     mNotes.forEachIndexed { index, note ->
                         val filename = if (extension.isEmpty()) note.title else "${note.title}.$extension"
@@ -892,7 +891,7 @@ class MainActivity : SimpleActivity() {
     }
 
     private fun refreshNotes(note: Note, deleteFile: Boolean) {
-        NotesHelper(this).getNotes {
+        NotesHelper(this).getNotes { it ->
             mNotes = it
             val firstNoteId = mNotes[0].id
             updateSelectedNote(firstNoteId!!)

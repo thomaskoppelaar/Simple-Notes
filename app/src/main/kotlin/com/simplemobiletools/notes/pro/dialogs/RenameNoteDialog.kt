@@ -13,7 +13,7 @@ import com.simplemobiletools.notes.pro.models.Note
 import kotlinx.android.synthetic.main.dialog_new_note.view.*
 import java.io.File
 
-class RenameNoteDialog(val activity: SimpleActivity, val note: Note, val currentNoteText: String?, val callback: (note: Note) -> Unit) {
+class RenameNoteDialog(val activity: SimpleActivity, val note: Note, private val currentNoteText: String?, val callback: (note: Note) -> Unit) {
 
     init {
         val view = activity.layoutInflater.inflate(R.layout.dialog_rename_note, null)

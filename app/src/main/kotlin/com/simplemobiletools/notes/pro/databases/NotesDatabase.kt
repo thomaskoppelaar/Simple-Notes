@@ -19,9 +19,9 @@ import java.util.concurrent.Executors
 @Database(entities = [Note::class, Widget::class], version = 2)
 abstract class NotesDatabase : RoomDatabase() {
 
-    abstract fun NotesDao(): NotesDao
+    abstract fun notesDao(): NotesDao
 
-    abstract fun WidgetsDao(): WidgetsDao
+    abstract fun widgetsDao(): WidgetsDao
 
     companion object {
         private var db: NotesDatabase? = null
@@ -54,7 +54,7 @@ abstract class NotesDatabase : RoomDatabase() {
             Executors.newSingleThreadScheduledExecutor().execute {
                 val generalNote = context.resources.getString(R.string.general_note)
                 val note = Note(null, generalNote, "", NoteType.TYPE_TEXT.value)
-                db!!.NotesDao().insertOrUpdate(note)
+                db!!.notesDao().insertOrUpdate(note)
             }
         }
 

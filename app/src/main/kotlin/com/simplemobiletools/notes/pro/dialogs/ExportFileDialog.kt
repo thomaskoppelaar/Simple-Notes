@@ -20,7 +20,7 @@ class ExportFileDialog(val activity: SimpleActivity, val note: Note, val callbac
             file_name.setText(note.title)
             file_extension.setText(activity.config.lastUsedExtension)
             file_path.setOnClickListener {
-                FilePickerDialog(activity, realPath, false, false, true, true) {
+                FilePickerDialog(activity, realPath, pickFile = false, showHidden = false, showFAB = true, canAddShowHiddenButton = true) {
                     file_path.text = activity.humanizePath(it)
                     realPath = it
                 }

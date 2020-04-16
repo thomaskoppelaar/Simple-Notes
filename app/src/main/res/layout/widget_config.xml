@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/notes_holder"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
@@ -61,16 +61,15 @@
         android:id="@+id/config_bg_color"
         android:layout_width="@dimen/widget_colorpicker_size"
         android:layout_height="@dimen/widget_colorpicker_size"
-        android:layout_above="@+id/config_text_color"/>
+        android:layout_above="@+id/config_text_color"
+        android:contentDescription="@string/config_bg_color_desc" />
 
     <RelativeLayout
-        android:id="@+id/config_bg_seekbar_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignTop="@+id/config_bg_color"
         android:layout_alignBottom="@+id/config_bg_color"
         android:layout_toEndOf="@+id/config_bg_color"
-        android:layout_toRightOf="@+id/config_bg_color"
         android:background="@android:color/white">
 
         <SeekBar
@@ -86,7 +85,8 @@
         android:id="@+id/config_text_color"
         android:layout_width="@dimen/widget_colorpicker_size"
         android:layout_height="@dimen/widget_colorpicker_size"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:contentDescription="@string/config_text_color" />
 
     <Button
         android:id="@+id/config_save"
@@ -95,12 +95,12 @@
         android:layout_alignTop="@+id/config_text_color"
         android:layout_alignBottom="@+id/config_text_color"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:fontFamily="sans-serif-light"
         android:paddingLeft="@dimen/activity_margin"
         android:paddingRight="@dimen/activity_margin"
         android:text="@string/ok"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/big_text_size"/>
+        android:textSize="@dimen/big_text_size"
+        tools:ignore="RelativeOverlap" />
 
 </RelativeLayout>

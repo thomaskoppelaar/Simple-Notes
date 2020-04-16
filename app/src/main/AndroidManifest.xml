@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.simplemobiletools.notes.pro"
     android:installLocation="auto">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission
+    <!-- <uses-permission
         android:name="android.permission.USE_FINGERPRINT"
-        tools:node="remove"/>
+        tools:node="remove"/> -->
 
     <uses-feature
         android:name="android.hardware.faketouch"
@@ -16,13 +15,13 @@
 
     <application
         android:name=".App"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_launcher_name"
-        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup">
 
         <activity
             android:name=".activities.SplashActivity"
@@ -42,13 +41,13 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="file" />
                 <data android:mimeType="text/*"/>
             </intent-filter>
         </activity>
 
         <activity
             android:name=".activities.WidgetConfigureActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/MyWidgetConfigTheme">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
@@ -79,6 +78,7 @@
             android:name=".activities.SettingsActivity"
             android:label="@string/settings"
             android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.SimpleActivity" />
 
         <service
             android:name=".services.WidgetService"

@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import com.simplemobiletools.commons.extensions.*
+import com.simplemobiletools.commons.views.MyEditText
 import com.simplemobiletools.notes.pro.R
 import com.simplemobiletools.notes.pro.activities.MainActivity
 import com.simplemobiletools.notes.pro.extensions.config
@@ -29,7 +30,7 @@ import java.io.File
 
 // text history handling taken from https://gist.github.com/zeleven/0cfa738c1e8b65b23ff7df1fc30c9f7e
 class TextFragment : NoteFragment() {
-    private val TEXT = "text"
+    private val text = "text"
 
     private var textHistory = TextHistory()
     private var isUndoOrRedo = false
@@ -98,15 +99,15 @@ class TextFragment : NoteFragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (note != null) {
-            outState.putString(TEXT, getCurrentNoteViewText())
+            outState.putString(text, getCurrentNoteViewText())
         }
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
-        if (savedInstanceState != null && note != null && savedInstanceState.containsKey(TEXT)) {
+        if (savedInstanceState != null && note != null && savedInstanceState.containsKey(text)) {
             skipTextUpdating = true
-            val newText = savedInstanceState.getString(TEXT) ?: ""
+            val newText = savedInstanceState.getString(text) ?: ""
             view.text_note_view.setText(newText)
         }
     }
@@ -172,7 +173,7 @@ class TextFragment : NoteFragment() {
         note?.path = path
     }
 
-    fun getNotesView() = view.text_note_view
+    fun getNotesView(): MyEditText = view.text_note_view
 
     fun saveText(force: Boolean) {
         if (note == null) {
